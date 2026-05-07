@@ -5,7 +5,8 @@
     - name: Check services
       shell: |
         for svc in nginx php8.1-fpm mysql redis-server; do
-          echo "- $svc: $(systemctl is-active $svc 2>/dev/null || echo 'inactive/failed')"
+          status=$(systemctl is-active $svc 2>/dev/null || true)
+          echo "- $svc: $status"
         done
       register: services_status
       changed_when: false

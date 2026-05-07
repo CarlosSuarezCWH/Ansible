@@ -8,7 +8,8 @@
     - name: Linux - Check services
       shell: |
         for svc in {{ critical_services_linux }}; do
-          echo "- $svc: $(systemctl is-active $svc 2>/dev/null || echo 'inactive/failed')"
+          status=$(systemctl is-active $svc 2>/dev/null || true)
+          echo "- $svc: $status"
         done
       register: srv_linux
       when: ansible_os_family != 'Windows'
