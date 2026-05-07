@@ -15,3 +15,4 @@
     - name: Report
       debug:
         msg: "{{ services_status.stdout }}"
+      when: services_status.stdout is defined

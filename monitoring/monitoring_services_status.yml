@@ -32,3 +32,4 @@
     - name: Mostrar estado
       debug:
         msg: "{{ srv_linux.stdout if ansible_os_family != 'Windows' else srv_win.stdout }}"
+      when: srv_linux.stdout is defined or srv_win.stdout is defined
