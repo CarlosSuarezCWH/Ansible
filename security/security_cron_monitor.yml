@@ -1,0 +1,12 @@
+---
+- name: Verificar crontab de root y usuarios
+  hosts: all
+  tasks:
+    - name: Get crons
+      shell: for user in $(cut -f1 -d: /etc/passwd); do crontab -u $user -l 2>/dev/null; done
+      register: crons
+      changed_when: false
+      ignore_errors: true
+    - name: Mostrar
+      debug:
+        var: crons.stdout_lines

@@ -1,0 +1,56 @@
+---
+- name: Revisar CPU, RAM, disco en Linux/Windows
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Linux - Obtener uso de CPU
+      command: top -bn1 | grep "Cpu(s)"
+      register: cpu_linux
+      when: ansible_os_family != 'Windows'
+      changed_when: false
+
+    - name: Linux - Obtener uso de RAM
+      command: free -m
+      register: ram_linux
+      when: ansible_os_family != 'Windows'
+      changed_when: false
+
+    - name: Linux - Obtener uso de Disco
+      command: df -h
+      register: disk_linux
+      when: ansible_os_family != 'Windows'
+      changed_when: false
+
+    - name: Windows - Obtener uso de CPU
+      win_shell: Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average
+      register: cpu_win
+      when: ansible_os_family == 'Windows'
+      changed_when: false
+
+    - name: Windows - Obtener uso de RAM
+      win_shell: Get-WmiObject Win32_OperatingSystem | Select-Object FreePhysicalMemory, TotalVisibleMemorySize
+      register: ram_win
+      when: ansible_os_family == 'Windows'
+      changed_when: false
+
+    - name: Windows - Obtener uso de Disco
+      win_shell: Get-WmiObject Win32_LogicalDisk -Filter "DriveType=3" | Select-Object DeviceID, FreeSpace, Size
+      register: disk_win
+      when: ansible_os_family == 'Windows'
+      changed_when: false
+
+    - name: Mostrar resultados Linux
+      debug:
+        msg:
+          - "CPU: {{ cpu_linux.stdout | default('') }}"
+          - "RAM: {{ ram_linux.stdout_lines[1] | default('') }}"
+          - "Disco: {{ disk_linux.stdout_lines | default([]) }}"
+      when: ansible_os_family != 'Windows'
+
+    - name: Mostrar resultados Windows
+      debug:
+        msg:
+          - "CPU: {{ cpu_win.stdout | default('') }}"
+          - "RAM: {{ ram_win.stdout | default('') }}"
+          - "Disco: {{ disk_win.stdout | default('') }}"
+      when: ansible_os_family == 'Windows'

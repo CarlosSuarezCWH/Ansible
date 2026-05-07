@@ -1,0 +1,15 @@
+---
+- name: Estado de servicios Windows
+  hosts: all
+  vars:
+    win_services: ['Spooler', 'W32Time']
+  tasks:
+    - name: Get service status
+      win_service:
+        name: "{{ item }}"
+      register: win_srv
+      loop: "{{ win_services }}"
+
+    - name: Report
+      debug:
+        msg: "{{ win_srv.results | map(attribute='state', default='failed') | list }}"

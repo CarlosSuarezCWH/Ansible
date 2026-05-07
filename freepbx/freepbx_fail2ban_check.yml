@@ -1,0 +1,12 @@
+---
+- name: Verificar bans por intentos de ataque
+  hosts: all
+  tasks:
+    - name: List bans
+      command: fail2ban-client status asterisk
+      register: f2b
+      changed_when: false
+
+    - name: Mostrar
+      debug:
+        var: f2b.stdout_lines

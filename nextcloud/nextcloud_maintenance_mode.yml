@@ -1,0 +1,11 @@
+---
+- name: Activar/desactivar modo mantenimiento
+  hosts: all
+  vars:
+    maintenance_state: "on" # on o off
+  tasks:
+    - name: Set maintenance
+      command: sudo -u www-data php occ maintenance:mode --{{ maintenance_state }}
+      args:
+        chdir: /var/www/nextcloud
+      changed_when: true

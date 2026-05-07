@@ -1,0 +1,7 @@
+---
+- name: Eliminar contenedores, imágenes, redes, volúmenes no usados
+  hosts: all
+  tasks:
+    - name: Docker system prune
+      command: docker system prune -a --volumes -f
+      changed_when: true

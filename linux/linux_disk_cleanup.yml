@@ -1,0 +1,11 @@
+---
+- name: Liberar espacio eliminando logs, cores, basura
+  hosts: all
+  become: true
+  tasks:
+    - name: Eliminar archivos core
+      shell: find / -name "core" -type f -exec rm -f {} + 2>/dev/null || true
+      changed_when: false
+    - name: Vaciar logs de journal
+      command: journalctl --vacuum-time=7d
+      changed_when: true

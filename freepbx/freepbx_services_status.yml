@@ -1,0 +1,17 @@
+---
+- name: Estado de servicios FreePBX
+  hosts: all
+  tasks:
+    - name: Check services
+      command: systemctl is-active {{ item }}
+      register: fbx_services
+      loop:
+        - asterisk
+        - httpd
+        - mariadb
+      ignore_errors: true
+      changed_when: false
+
+    - name: Report
+      debug:
+        msg: "{{ fbx_services.results | map(attribute='stdout', default='failed') | list }}"

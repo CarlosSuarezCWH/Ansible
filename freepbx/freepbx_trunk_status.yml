@@ -1,0 +1,12 @@
+---
+- name: Verificar estado de troncales SIP/IAX
+  hosts: all
+  tasks:
+    - name: Registrations
+      command: asterisk -rx "pjsip show registrations"
+      register: trunks
+      changed_when: false
+
+    - name: Mostrar
+      debug:
+        var: trunks.stdout_lines

@@ -1,0 +1,7 @@
+---
+- name: Limpiar registros de llamadas (CDR) viejos
+  hosts: all
+  tasks:
+    - name: Cleanup script
+      debug:
+        msg: "Limpieza manual via cron o mysql (DELETE FROM asteriskcdrdb.cdr WHERE calldate < DATE_SUB(NOW(), INTERVAL 1 YEAR))"

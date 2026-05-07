@@ -1,0 +1,11 @@
+---
+- name: Verificar sitios caídos (HTTP 500, etc)
+  hosts: all
+  tasks:
+    - name: Verificar nginx error logs
+      shell: tail -n 100 /var/log/nginx/error.log | grep -E "500|502|503|504" || echo "No errors"
+      register: nginx_err
+      changed_when: false
+    - name: Mostrar
+      debug:
+        var: nginx_err.stdout_lines

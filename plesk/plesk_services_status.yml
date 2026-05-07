@@ -1,0 +1,20 @@
+---
+- name: Estado de servicios Plesk
+  hosts: all
+  tasks:
+    - name: Check services
+      command: systemctl is-active {{ item }}
+      register: plesk_services
+      loop:
+        - psa
+        - sw-cp-server
+        - mariadb
+        - postfix
+        - dovecot
+        - named
+      ignore_errors: true
+      changed_when: false
+
+    - name: Report
+      debug:
+        msg: "{{ plesk_services.results | map(attribute='stdout', default='failed') | list }}"

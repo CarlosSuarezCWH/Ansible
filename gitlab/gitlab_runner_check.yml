@@ -1,0 +1,12 @@
+---
+- name: Verificar estado de runners registrados
+  hosts: all
+  tasks:
+    - name: Runner list
+      command: gitlab-runner list
+      register: gl_runners
+      changed_when: false
+
+    - name: Mostrar
+      debug:
+        var: gl_runners.stdout_lines

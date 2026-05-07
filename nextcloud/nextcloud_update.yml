@@ -1,0 +1,10 @@
+---
+- name: Actualizar Nextcloud (modo mantenimiento)
+  hosts: all
+  tasks:
+    - name: Ejecutar updater
+      command: sudo -u www-data php updater/updater.phar --no-interaction
+      args:
+        chdir: /var/www/nextcloud
+      changed_when: true
+      ignore_errors: true

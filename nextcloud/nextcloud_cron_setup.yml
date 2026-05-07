@@ -1,0 +1,10 @@
+---
+- name: Verificar/Configurar cron para tareas internas
+  hosts: all
+  tasks:
+    - name: Set cron job for nextcloud
+      cron:
+        name: "Nextcloud cron"
+        user: www-data
+        job: "php -f /var/www/nextcloud/cron.php"
+        minute: "*/5"

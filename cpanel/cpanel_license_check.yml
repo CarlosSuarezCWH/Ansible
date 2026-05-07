@@ -1,0 +1,12 @@
+---
+- name: Verificar estado de licencia cPanel
+  hosts: all
+  tasks:
+    - name: Verificar licencia
+      command: /usr/local/cpanel/cpkeyclt
+      register: cpkey
+      changed_when: false
+
+    - name: Mostrar
+      debug:
+        var: cpkey.stdout_lines

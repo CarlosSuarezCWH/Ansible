@@ -1,0 +1,8 @@
+---
+- name: Reiniciar si actualizaciones lo requieren
+  hosts: all
+  tasks:
+    - name: Reboot
+      win_reboot:
+        msg: "Reboot triggered by Ansible"
+      when: reboot_required is defined and reboot_required

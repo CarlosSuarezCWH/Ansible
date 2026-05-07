@@ -1,0 +1,7 @@
+---
+- name: Ejecutar escaneo rápido
+  hosts: all
+  tasks:
+    - name: Scan
+      win_shell: Start-MpScan -ScanType QuickScan
+      changed_when: true

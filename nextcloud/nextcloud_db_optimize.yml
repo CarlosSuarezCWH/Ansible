@@ -1,0 +1,10 @@
+---
+- name: Optimizar tablas de la BD de Nextcloud
+  hosts: all
+  tasks:
+    - name: DB optimize
+      command: sudo -u www-data php occ db:add-missing-indices
+      args:
+        chdir: /var/www/nextcloud
+      changed_when: true
+      ignore_errors: true

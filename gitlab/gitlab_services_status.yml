@@ -1,0 +1,12 @@
+---
+- name: Estado de servicios GitLab
+  hosts: all
+  tasks:
+    - name: Check gitlab services
+      command: gitlab-ctl status
+      register: gitlab_status
+      changed_when: false
+
+    - name: Report
+      debug:
+        var: gitlab_status.stdout_lines

@@ -1,0 +1,9 @@
+---
+- name: Actualizar GitLab a última versión
+  hosts: all
+  tasks:
+    - name: Actualizar gitlab-ee
+      apt:
+        name: gitlab-ee
+        state: latest
+      when: ansible_os_family == 'Debian'

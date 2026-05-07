@@ -1,0 +1,7 @@
+---
+- name: Limpiar logs antiguos de Plesk
+  hosts: all
+  tasks:
+    - name: Limpiar logs
+      command: find /var/www/vhosts/system/*/logs/ -name "*.gz" -mtime +30 -exec rm -f {} \;
+      changed_when: true

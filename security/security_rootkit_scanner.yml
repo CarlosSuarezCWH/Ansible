@@ -1,0 +1,12 @@
+---
+- name: Ejecutar rkhunter/chkrootkit en Linux
+  hosts: all
+  tasks:
+    - name: Rkhunter check
+      command: rkhunter --check --sk
+      register: rk
+      changed_when: false
+      ignore_errors: true
+    - name: Mostrar
+      debug:
+        var: rk.stdout_lines

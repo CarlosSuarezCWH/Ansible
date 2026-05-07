@@ -1,0 +1,7 @@
+---
+- name: Generar backup de configuración
+  hosts: all
+  tasks:
+    - name: Run backup
+      command: fwconsole backup --run
+      changed_when: true

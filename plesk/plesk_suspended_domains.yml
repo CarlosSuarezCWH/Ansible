@@ -1,0 +1,12 @@
+---
+- name: Listar dominios suspendidos
+  hosts: all
+  tasks:
+    - name: Listar dominios
+      shell: "plesk db 'SELECT name FROM domains WHERE status = 2;'"
+      register: suspended_domains
+      changed_when: false
+
+    - name: Mostrar
+      debug:
+        var: suspended_domains.stdout_lines

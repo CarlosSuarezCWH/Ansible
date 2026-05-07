@@ -1,0 +1,10 @@
+---
+- name: Actualizar plugins de todos los sitios
+  hosts: all
+  tasks:
+    - name: Actualizar plugins
+      command: wp plugin update --all --path={{ item }} --allow-root
+      with_fileglob:
+        - "/var/www/*/htdocs"
+      changed_when: true
+      ignore_errors: true

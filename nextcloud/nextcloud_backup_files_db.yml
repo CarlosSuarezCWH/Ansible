@@ -1,0 +1,7 @@
+---
+- name: Respaldar archivos data + BD
+  hosts: all
+  tasks:
+    - name: Backup placeholder
+      debug:
+        msg: "Ejecutar dump de BD y rsync de carpeta data"

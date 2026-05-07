@@ -1,0 +1,25 @@
+---
+- name: Revisar I/O de discos (iostat)
+  hosts: all
+  tasks:
+    - name: Linux - Asegurar sysstat instalado
+      package:
+        name: sysstat
+        state: present
+      when: ansible_os_family != 'Windows'
+      
+    - name: Linux - Ejecutar iostat
+      command: iostat -dx 1 2
+      register: iostat_linux
+      when: ansible_os_family != 'Windows'
+      changed_when: false
+
+    - name: Windows - Get PhysicalDisk IO
+      win_shell: Get-WmiObject Win32_PerfFormattedData_PerfDisk_PhysicalDisk | Select-Object Name, DiskReadBytesPersec, DiskWriteBytesPersec
+      register: io_win
+      when: ansible_os_family == 'Windows'
+      changed_when: false
+
+    - name: Mostrar I/O
+      debug:
+        msg: "{{ iostat_linux.stdout_lines | default(io_win.stdout_lines) }}"

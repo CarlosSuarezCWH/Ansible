@@ -1,0 +1,17 @@
+---
+- name: Listar usuarios, últimos logins, sudoers
+  hosts: all
+  tasks:
+    - name: Listar usuarios
+      command: cat /etc/passwd
+      register: passwd
+      changed_when: false
+
+    - name: Ultimos logins
+      command: last -a | head -n 20
+      register: logins
+      changed_when: false
+
+    - name: Reporte
+      debug:
+        msg: "Ultimos logins: {{ logins.stdout_lines }}"

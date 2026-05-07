@@ -1,0 +1,14 @@
+---
+- name: Enviar logs a SIEM central
+  hosts: all
+  tasks:
+    - name: Rsyslog fwd config (placeholder)
+      lineinfile:
+        path: /etc/rsyslog.conf
+        line: '*.* @@siem.server.local:514'
+      notify: Restart rsyslog
+  handlers:
+    - name: Restart rsyslog
+      service:
+        name: rsyslog
+        state: restarted

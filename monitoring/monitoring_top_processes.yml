@@ -1,0 +1,20 @@
+---
+- name: Identificar procesos que más consumen recursos
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Linux - Procesos top por CPU y RAM
+      command: ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head -n 15
+      register: top_procs_linux
+      when: ansible_os_family != 'Windows'
+      changed_when: false
+
+    - name: Windows - Procesos top por CPU y RAM
+      win_shell: Get-Process | Sort-Object CPU -Descending | Select-Object -First 15
+      register: top_procs_win
+      when: ansible_os_family == 'Windows'
+      changed_when: false
+
+    - name: Mostrar procesos
+      debug:
+        var: top_procs_linux.stdout_lines | default(top_procs_win.stdout_lines)

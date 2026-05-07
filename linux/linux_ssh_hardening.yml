@@ -1,0 +1,24 @@
+---
+- name: Configurar SSH seguro
+  hosts: all
+  become: true
+  tasks:
+    - name: Deshabilitar Root Login
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PermitRootLogin'
+        line: 'PermitRootLogin no'
+        validate: 'sshd -t -f %s'
+      notify: Restart SSH
+
+    - name: Deshabilitar autenticacion por password (opcional, set to yes by default to prevent lockout)
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PasswordAuthentication'
+        line: 'PasswordAuthentication yes' # Cambiar a no en produccion asegurada
+
+  handlers:
+    - name: Restart SSH
+      service:
+        name: sshd
+        state: restarted

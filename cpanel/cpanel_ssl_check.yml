@@ -1,0 +1,13 @@
+---
+- name: Verificar certificados expirando próximos 30 días
+  hosts: all
+  tasks:
+    - name: Ejecutar AutoSSL check
+      command: /usr/local/cpanel/bin/autossl_check_all
+      register: autossl
+      changed_when: false
+      ignore_errors: true
+
+    - name: Mostrar log
+      debug:
+        msg: "AutoSSL check trigger ejecutado."

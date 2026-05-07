@@ -1,0 +1,12 @@
+---
+- name: Verificar reglas y estado del firewall
+  hosts: all
+  tasks:
+    - name: Get firewall profile
+      win_shell: Get-NetFirewallProfile | Select-Object Name, Enabled
+      register: fw_stat
+      changed_when: false
+
+    - name: Mostrar
+      debug:
+        var: fw_stat.stdout_lines

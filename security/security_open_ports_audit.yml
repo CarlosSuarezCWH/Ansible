@@ -1,0 +1,11 @@
+---
+- name: Listar puertos abiertos y justificar uso
+  hosts: all
+  tasks:
+    - name: Nmap
+      command: ss -tulpn
+      register: ports
+      changed_when: false
+    - name: Mostrar
+      debug:
+        var: ports.stdout_lines

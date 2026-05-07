@@ -1,0 +1,16 @@
+---
+- name: Actualizar paquetes del sistema
+  hosts: all
+  become: true
+  tasks:
+    - name: Debian/Ubuntu - Update apt
+      apt:
+        update_cache: yes
+        upgrade: dist
+      when: ansible_os_family == 'Debian'
+
+    - name: RHEL/CentOS - Update yum/dnf
+      yum:
+        name: '*'
+        state: latest
+      when: ansible_os_family == 'RedHat'

@@ -1,0 +1,11 @@
+---
+- name: Actualizar núcleos de WordPress (core)
+  hosts: all
+  tasks:
+    - name: Actualizar core
+      command: wp core update --path={{ item }} --allow-root
+      with_fileglob:
+        - "/var/www/*/htdocs"
+      register: wp_update
+      changed_when: true
+      ignore_errors: true

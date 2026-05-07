@@ -1,0 +1,7 @@
+---
+- name: Respaldar todas las BD PostgreSQL
+  hosts: all
+  tasks:
+    - name: Dump all
+      command: sudo -u postgres pg_dumpall | gzip > /backup/pg_all_$(date +%F).sql.gz
+      changed_when: true

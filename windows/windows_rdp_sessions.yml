@@ -1,0 +1,12 @@
+---
+- name: Listar sesiones RDP activas
+  hosts: all
+  tasks:
+    - name: Get RDP
+      win_shell: qwinsta
+      register: rdp_sess
+      changed_when: false
+
+    - name: Mostrar
+      debug:
+        var: rdp_sess.stdout_lines

@@ -1,0 +1,15 @@
+---
+- name: Limpiar paquetes huérfanos y caché
+  hosts: all
+  become: true
+  tasks:
+    - name: Debian/Ubuntu - Autoremove & autoclean
+      apt:
+        autoremove: yes
+        autoclean: yes
+      when: ansible_os_family == 'Debian'
+
+    - name: RHEL/CentOS - Autoremove & clean all
+      shell: yum autoremove -y && yum clean all
+      when: ansible_os_family == 'RedHat'
+      changed_when: false

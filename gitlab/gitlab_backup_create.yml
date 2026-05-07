@@ -1,0 +1,12 @@
+---
+- name: Ejecutar backup oficial de GitLab
+  hosts: all
+  tasks:
+    - name: Crear Backup
+      command: gitlab-backup create
+      register: gl_backup
+      changed_when: true
+
+    - name: Mostrar output
+      debug:
+        var: gl_backup.stdout_lines

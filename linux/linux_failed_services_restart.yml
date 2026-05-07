@@ -1,0 +1,14 @@
+---
+- name: Detectar y reiniciar servicios caídos
+  hosts: all
+  become: true
+  tasks:
+    - name: Listar servicios fallidos
+      command: systemctl --failed --no-legend
+      register: failed_services
+      changed_when: false
+
+    - name: Reiniciar servicios fallidos
+      command: systemctl restart {{ item.split()[0] }}
+      loop: "{{ failed_services.stdout_lines }}"
+      when: failed_services.stdout_lines | length > 0

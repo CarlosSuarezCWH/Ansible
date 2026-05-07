@@ -1,0 +1,13 @@
+---
+- name: Verificar último backup
+  hosts: all
+  tasks:
+    - name: Get wbadmin status
+      win_shell: wbadmin get status
+      register: wb_stat
+      changed_when: false
+      ignore_errors: true
+
+    - name: Mostrar
+      debug:
+        var: wb_stat.stdout_lines

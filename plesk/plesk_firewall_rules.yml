@@ -1,0 +1,13 @@
+---
+- name: Listar reglas de firewall de Plesk
+  hosts: all
+  tasks:
+    - name: Firewall list
+      command: /usr/local/psa/bin/modules/firewall/settings -l
+      register: plesk_fw
+      changed_when: false
+      ignore_errors: true
+
+    - name: Mostrar Firewall
+      debug:
+        var: plesk_fw.stdout_lines

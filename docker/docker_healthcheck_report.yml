@@ -1,0 +1,13 @@
+---
+- name: Verificar healthcheck de cada contenedor
+  hosts: all
+  tasks:
+    - name: Healthcheck status
+      command: docker ps --format "{{'{{'}}.Names{{'}}'}}: {{'{{'}}.Status{{'}}'}}" | grep health
+      register: d_health
+      changed_when: false
+      ignore_errors: true
+
+    - name: Mostrar
+      debug:
+        var: d_health.stdout_lines

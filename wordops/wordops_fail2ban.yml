@@ -1,0 +1,7 @@
+---
+- name: Configurar protección /wp-admin, xmlrpc
+  hosts: all
+  tasks:
+    - name: Asegurar wo stack install fail2ban
+      command: wo stack install --fail2ban
+      changed_when: true

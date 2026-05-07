@@ -1,0 +1,16 @@
+---
+- name: Verificar antigüedad del último backup
+  hosts: all
+  vars:
+    backup_dir: "/var/backups"
+  tasks:
+    - name: Linux - Check newest file in backup dir
+      shell: find {{ backup_dir }} -type f -mtime -1 | wc -l
+      register: backup_fresh
+      when: ansible_os_family != 'Windows'
+      changed_when: false
+
+    - name: Mostrar estado backup
+      debug:
+        msg: "Archivos de backup recientes (<24h): {{ backup_fresh.stdout }}"
+      when: ansible_os_family != 'Windows'

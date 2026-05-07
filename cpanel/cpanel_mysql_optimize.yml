@@ -1,0 +1,8 @@
+---
+- name: Optimizar tablas MySQL automáticamente
+  hosts: all
+  tasks:
+    - name: Optimizar bases de datos mysqlcheck
+      command: mysqlcheck -o --all-databases
+      register: mysqlcheck_out
+      changed_when: true

@@ -1,0 +1,7 @@
+---
+- name: Limpiar logs de contenedores
+  hosts: all
+  tasks:
+    - name: Config en daemon.json (placeholder)
+      debug:
+        msg: "Se recomienda setear log-opts max-size y max-file en daemon.json"

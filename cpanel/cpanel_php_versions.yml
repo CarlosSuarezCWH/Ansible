@@ -1,0 +1,12 @@
+---
+- name: Listar versiones PHP instaladas y la default
+  hosts: all
+  tasks:
+    - name: Listar PHP
+      command: /usr/local/cpanel/bin/rebuild_phpconf --current
+      register: php_ver
+      changed_when: false
+
+    - name: Mostrar versiones
+      debug:
+        var: php_ver.stdout_lines

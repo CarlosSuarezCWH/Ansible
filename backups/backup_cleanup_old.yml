@@ -1,0 +1,17 @@
+---
+- name: Eliminar backups con retención
+  hosts: all
+  vars:
+    backup_dir: "/backup"
+    retention_days: 30
+  tasks:
+    - name: Find and delete
+      find:
+        paths: "{{ backup_dir }}"
+        age: "{{ retention_days }}d"
+      register: old_backups
+    - name: Delete
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      loop: "{{ old_backups.files }}"

@@ -1,0 +1,7 @@
+---
+- name: Limpiar caché de previews viejos
+  hosts: all
+  tasks:
+    - name: Preview generator command placeholder
+      debug:
+        msg: "Requiere preview generator app"

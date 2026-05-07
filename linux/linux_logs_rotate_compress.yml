@@ -1,0 +1,8 @@
+---
+- name: Rotar y comprimir logs viejos
+  hosts: all
+  become: true
+  tasks:
+    - name: Forzar logrotate
+      command: logrotate -f /etc/logrotate.conf
+      changed_when: true

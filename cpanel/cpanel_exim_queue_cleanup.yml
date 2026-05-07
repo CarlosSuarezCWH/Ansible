@@ -1,0 +1,14 @@
+---
+- name: Limpiar cola de correos si excede X cantidad
+  hosts: all
+  vars:
+    exim_queue_limit: 1000
+  tasks:
+    - name: Obtener conteo de exim
+      command: exim -bpc
+      register: exim_queue_count
+      changed_when: false
+
+    - name: Limpiar cola si excede el limite
+      command: exim -bp | awk '/^ *[0-9]+[mhd]/{print "exim -Mrm " $3}' | bash
+      when: exim_queue_count.stdout | int > exim_queue_limit

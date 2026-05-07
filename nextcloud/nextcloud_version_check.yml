@@ -1,0 +1,15 @@
+---
+- name: Comparar versión actual vs upstream
+  hosts: all
+  tasks:
+    - name: Version info
+      command: sudo -u www-data php occ status
+      args:
+        chdir: /var/www/nextcloud
+      register: nc_status
+      changed_when: false
+      ignore_errors: true
+
+    - name: Mostrar
+      debug:
+        var: nc_status.stdout_lines

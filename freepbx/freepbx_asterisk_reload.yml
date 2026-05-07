@@ -1,0 +1,7 @@
+---
+- name: Recargar configuración sin caída del servicio
+  hosts: all
+  tasks:
+    - name: Reload
+      command: asterisk -rx "core reload"
+      changed_when: true

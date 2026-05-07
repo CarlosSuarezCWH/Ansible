@@ -1,0 +1,12 @@
+---
+- name: Listar usuarios locales
+  hosts: all
+  tasks:
+    - name: Get users
+      win_shell: Get-LocalUser | Select-Object Name, Enabled, LastLogon
+      register: win_usr
+      changed_when: false
+
+    - name: Mostrar
+      debug:
+        var: win_usr.stdout_lines

@@ -1,0 +1,12 @@
+---
+- name: Revisar estado de componentes internos
+  hosts: all
+  tasks:
+    - name: Healthcheck
+      command: gitlab-rake gitlab:check SANITIZE=true
+      register: gitlab_check
+      changed_when: false
+
+    - name: Mostrar
+      debug:
+        var: gitlab_check.stdout_lines

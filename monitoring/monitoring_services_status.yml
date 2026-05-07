@@ -1,0 +1,26 @@
+---
+- name: Estado de servicios críticos por servidor
+  hosts: all
+  vars:
+    critical_services_linux: ['sshd', 'cron']
+    critical_services_win: ['Spooler']
+  tasks:
+    - name: Linux - Check services
+      command: systemctl is-active {{ item }}
+      register: srv_linux
+      loop: "{{ critical_services_linux }}"
+      when: ansible_os_family != 'Windows'
+      changed_when: false
+      ignore_errors: true
+
+    - name: Windows - Check services
+      win_service:
+        name: "{{ item }}"
+      register: srv_win
+      loop: "{{ critical_services_win }}"
+      when: ansible_os_family == 'Windows'
+      ignore_errors: true
+
+    - name: Mostrar estado
+      debug:
+        msg: "{{ srv_linux.results | default(srv_win.results) | map(attribute='stdout', default='failed') | list }}"

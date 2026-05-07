@@ -1,0 +1,12 @@
+---
+- name: Reportar versión actual y última estable
+  hosts: all
+  tasks:
+    - name: Check gitlab info
+      command: gitlab-rake gitlab:env:info
+      register: gitlab_info
+      changed_when: false
+
+    - name: Mostrar
+      debug:
+        var: gitlab_info.stdout_lines

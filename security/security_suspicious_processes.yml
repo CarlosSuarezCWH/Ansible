@@ -1,0 +1,11 @@
+---
+- name: Buscar miners, backdoors, procesos ocultos
+  hosts: all
+  tasks:
+    - name: Buscando procesos de alto CPU sin binario asociado
+      shell: ps -eo pid,cmd,%cpu --sort=-%cpu | head -n 10
+      register: procs
+      changed_when: false
+    - name: Mostrar
+      debug:
+        var: procs.stdout_lines

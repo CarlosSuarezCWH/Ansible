@@ -1,0 +1,18 @@
+---
+- name: Estado de servicios Nextcloud
+  hosts: all
+  tasks:
+    - name: Check services
+      command: systemctl is-active {{ item }}
+      register: nc_services
+      loop:
+        - apache2
+        - php8.1-fpm
+        - mysql
+        - redis-server
+      ignore_errors: true
+      changed_when: false
+
+    - name: Report
+      debug:
+        msg: "{{ nc_services.results | map(attribute='stdout', default='failed') | list }}"

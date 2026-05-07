@@ -1,0 +1,12 @@
+---
+- name: Verificar backups y espacio usado
+  hosts: all
+  tasks:
+    - name: Listar backups
+      command: plesk sbin pmm-ras --get-dump-list
+      register: plesk_backups
+      changed_when: false
+
+    - name: Mostrar backups
+      debug:
+        var: plesk_backups.stdout_lines

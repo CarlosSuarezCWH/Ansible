@@ -1,0 +1,7 @@
+---
+- name: Simular restauración para verificar integridad
+  hosts: localhost
+  tasks:
+    - name: Test
+      debug:
+        msg: "El script de test debe cargar el archivo en una instancia aislada."

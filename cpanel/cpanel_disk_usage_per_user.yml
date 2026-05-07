@@ -1,0 +1,12 @@
+---
+- name: Reportar uso de disco por cuenta de usuario
+  hosts: all
+  tasks:
+    - name: Listar cuotas de cPanel
+      command: /usr/local/cpanel/scripts/repquota
+      register: quota
+      changed_when: false
+
+    - name: Mostrar uso
+      debug:
+        var: quota.stdout_lines

@@ -1,0 +1,10 @@
+---
+- name: Actualizar módulos del sistema
+  hosts: all
+  tasks:
+    - name: Update all modules
+      command: fwconsole ma upgradeall
+      changed_when: true
+    - name: Reload
+      command: fwconsole reload
+      changed_when: true

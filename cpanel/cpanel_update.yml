@@ -1,0 +1,8 @@
+---
+- name: Actualizar cPanel y/o componentes
+  hosts: all
+  tasks:
+    - name: Ejecutar upcp
+      command: /scripts/upcp
+      register: upcp_out
+      changed_when: true

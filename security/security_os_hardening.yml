@@ -1,0 +1,9 @@
+---
+- name: Aplicar hardening CIS nivel 1
+  hosts: all
+  tasks:
+    - name: Deshabilitar filesystems no usados
+      modprobe:
+        name: "{{ item }}"
+        state: absent
+      loop: ['cramfs', 'freevxfs', 'jffs2', 'hfs', 'hfsplus', 'squashfs', 'udf', 'vfat']

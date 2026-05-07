@@ -1,0 +1,12 @@
+---
+- name: Reportar usuarios, proyectos, repos, storage
+  hosts: all
+  tasks:
+    - name: Uso stats
+      command: gitlab-rake gitlab:env:info
+      register: gitlab_usage
+      changed_when: false
+
+    - name: Mostrar
+      debug:
+        var: gitlab_usage.stdout_lines

@@ -1,0 +1,17 @@
+---
+- name: Verificar fechas de expiración de certificados SSL
+  hosts: all
+  vars:
+    ssl_domain: "localhost"
+    ssl_port: 443
+  tasks:
+    - name: Linux - Check SSL
+      shell: echo | openssl s_client -servername {{ ssl_domain }} -connect {{ ssl_domain }}:{{ ssl_port }} 2>/dev/null | openssl x509 -noout -dates
+      register: ssl_linux
+      when: ansible_os_family != 'Windows'
+      changed_when: false
+      ignore_errors: true
+
+    - name: Mostrar SSL expiry
+      debug:
+        msg: "{{ ssl_linux.stdout_lines | default('N/A o Windows no implementado en shell simple') }}"

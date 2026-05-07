@@ -1,0 +1,14 @@
+---
+- name: Reportar intentos de login fallidos
+  hosts: all
+  tasks:
+    - name: Linux - Failed logins en auth.log o secure
+      shell: grep "Failed password" /var/log/auth.log || grep "Failed password" /var/log/secure || echo "No failed logins found"
+      register: failed_linux
+      when: ansible_os_family != 'Windows'
+      changed_when: false
+      ignore_errors: true
+
+    - name: Mostrar intentos
+      debug:
+        msg: "{{ failed_linux.stdout_lines | default([]) }}"

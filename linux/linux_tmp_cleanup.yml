@@ -1,0 +1,16 @@
+---
+- name: Limpiar archivos temporales +30 días
+  hosts: all
+  become: true
+  tasks:
+    - name: Buscar y eliminar archivos en /tmp de más de 30 días
+      find:
+        paths: /tmp
+        age: 30d
+      register: tmp_files
+
+    - name: Eliminar archivos
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      loop: "{{ tmp_files.files }}"

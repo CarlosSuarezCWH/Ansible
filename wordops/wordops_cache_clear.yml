@@ -1,0 +1,10 @@
+---
+- name: Limpiar caché de Nginx/Redis
+  hosts: all
+  tasks:
+    - name: Limpiar Redis
+      command: wo clean --redis
+      changed_when: true
+    - name: Limpiar FastCGI
+      command: wo clean --fastcgi
+      changed_when: true

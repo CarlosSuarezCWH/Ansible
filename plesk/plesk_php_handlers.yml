@@ -1,0 +1,12 @@
+---
+- name: Listar handlers PHP configurados
+  hosts: all
+  tasks:
+    - name: PHP handlers
+      command: plesk bin php_handler --list
+      register: plesk_php
+      changed_when: false
+
+    - name: Mostrar PHP handlers
+      debug:
+        var: plesk_php.stdout_lines

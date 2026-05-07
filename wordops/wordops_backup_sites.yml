@@ -1,0 +1,7 @@
+---
+- name: Generar backup de archivos + BD
+  hosts: all
+  tasks:
+    - name: Backup
+      command: wo site backup --all
+      changed_when: true

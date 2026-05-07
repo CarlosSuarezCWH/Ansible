@@ -1,0 +1,12 @@
+---
+- name: Revisar logs recientes de seguridad
+  hosts: all
+  tasks:
+    - name: Security log
+      shell: tail -n 50 /var/log/asterisk/fail2ban || echo "No fail2ban log"
+      register: sec_log
+      changed_when: false
+
+    - name: Mostrar
+      debug:
+        var: sec_log.stdout_lines

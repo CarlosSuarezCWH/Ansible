@@ -1,0 +1,17 @@
+---
+- name: Monitorear conexiones activas en Apache
+  hosts: all
+  tasks:
+    - name: Contar conexiones HTTP
+      shell: netstat -an | grep :80 | wc -l
+      register: http_conn
+      changed_when: false
+
+    - name: Contar conexiones HTTPS
+      shell: netstat -an | grep :443 | wc -l
+      register: https_conn
+      changed_when: false
+
+    - name: Mostrar
+      debug:
+        msg: "Port 80: {{ http_conn.stdout }}, Port 443: {{ https_conn.stdout }}"

@@ -1,0 +1,10 @@
+---
+- name: Optimizar bases de datos WordPress
+  hosts: all
+  tasks:
+    - name: Optimizar DBs
+      command: wp db optimize --path={{ item }} --allow-root
+      with_fileglob:
+        - "/var/www/*/htdocs"
+      changed_when: true
+      ignore_errors: true

@@ -1,0 +1,7 @@
+---
+- name: Actualizar Plesk y extensiones
+  hosts: all
+  tasks:
+    - name: Actualizar plesk
+      command: plesk installer update --all-components
+      changed_when: true

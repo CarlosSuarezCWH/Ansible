@@ -1,0 +1,13 @@
+---
+- name: Verificar backups existentes y su tamaño
+  hosts: all
+  tasks:
+    - name: Verificar dir de backups
+      command: ls -lh /backup/cpbackup/daily/
+      register: cp_backups
+      changed_when: false
+      ignore_errors: true
+
+    - name: Mostrar backups
+      debug:
+        var: cp_backups.stdout_lines

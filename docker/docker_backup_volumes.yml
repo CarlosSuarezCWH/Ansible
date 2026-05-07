@@ -1,0 +1,12 @@
+---
+- name: Respaldar volúmenes persistentes
+  hosts: all
+  tasks:
+    - name: List vols
+      command: docker volume ls -q
+      register: d_vols
+      changed_when: false
+
+    - name: Mostrar script a usar (rsync de /var/lib/docker/volumes)
+      debug:
+        var: d_vols.stdout_lines

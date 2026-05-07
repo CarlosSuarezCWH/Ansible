@@ -1,0 +1,12 @@
+---
+- name: Estado y uptime
+  hosts: all
+  tasks:
+    - name: Get docker ps
+      command: docker ps -a --format "table {{'{{'}} .Names {{'}}'}}	{{'{{'}} .Status {{'}}'}}"
+      register: d_ps
+      changed_when: false
+
+    - name: Mostrar
+      debug:
+        var: d_ps.stdout_lines

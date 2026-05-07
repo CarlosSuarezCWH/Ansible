@@ -1,0 +1,11 @@
+---
+- name: Sincronizar directorios clave a NAS/S3 remoto
+  hosts: all
+  vars:
+    src_dir: "/var/www"
+    dest_dir: "/backup/remote/"
+    rsync_opts: "-avz --delete"
+  tasks:
+    - name: Rsync
+      command: rsync {{ rsync_opts }} {{ src_dir }} {{ dest_dir }}
+      changed_when: true

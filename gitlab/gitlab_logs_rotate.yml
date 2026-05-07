@@ -1,0 +1,7 @@
+---
+- name: Rotar logs de GitLab
+  hosts: all
+  tasks:
+    - name: Logrotate
+      command: gitlab-ctl restart logrotate
+      changed_when: true

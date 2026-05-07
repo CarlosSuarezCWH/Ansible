@@ -1,0 +1,9 @@
+---
+- name: Instalar actualizaciones de seguridad
+  hosts: all
+  tasks:
+    - name: Install updates
+      win_updates:
+        category_names:
+          - SecurityUpdates
+        state: installed

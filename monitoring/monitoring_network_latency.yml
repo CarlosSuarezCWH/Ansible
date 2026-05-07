@@ -1,0 +1,22 @@
+---
+- name: Medir latencia y pérdida de paquetes
+  hosts: all
+  vars:
+    ping_target: "8.8.8.8"
+    ping_count: 5
+  tasks:
+    - name: Linux - Ping target
+      command: ping -c {{ ping_count }} {{ ping_target }}
+      register: ping_linux
+      when: ansible_os_family != 'Windows'
+      changed_when: false
+
+    - name: Windows - Ping target
+      win_shell: Test-Connection -ComputerName {{ ping_target }} -Count {{ ping_count }}
+      register: ping_win
+      when: ansible_os_family == 'Windows'
+      changed_when: false
+
+    - name: Mostrar latencia
+      debug:
+        msg: "{{ ping_linux.stdout_lines | default(ping_win.stdout_lines) }}"

@@ -1,0 +1,19 @@
+---
+- name: Verificar si necesita reinicio por kernel update
+  hosts: all
+  tasks:
+    - name: Check /var/run/reboot-required (Debian)
+      stat:
+        path: /var/run/reboot-required
+      register: reboot_deb
+
+    - name: Check needs-restarting (RHEL)
+      command: needs-restarting -r
+      register: reboot_rhel
+      ignore_errors: true
+      changed_when: false
+      when: ansible_os_family == 'RedHat'
+
+    - name: Reportar
+      debug:
+        msg: "Reboot required: {{ reboot_deb.stat.exists | default(reboot_rhel.rc == 1) }}"

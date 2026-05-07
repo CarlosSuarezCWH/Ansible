@@ -1,0 +1,12 @@
+---
+- name: Estado de licencia Plesk
+  hosts: all
+  tasks:
+    - name: License info
+      command: plesk bin license --info
+      register: plesk_lic
+      changed_when: false
+
+    - name: Mostrar Licencia
+      debug:
+        var: plesk_lic.stdout_lines

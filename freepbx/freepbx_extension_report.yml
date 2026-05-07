@@ -1,0 +1,12 @@
+---
+- name: Listar extensiones registradas
+  hosts: all
+  tasks:
+    - name: Asterisk sip show peers
+      command: asterisk -rx "pjsip show endpoints"
+      register: sip_peers
+      changed_when: false
+
+    - name: Mostrar
+      debug:
+        var: sip_peers.stdout_lines

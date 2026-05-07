@@ -1,0 +1,15 @@
+---
+- name: Sincronizar hora con servidores NTP
+  hosts: all
+  become: true
+  tasks:
+    - name: Instalar chrony
+      package:
+        name: chrony
+        state: present
+
+    - name: Iniciar chronyd
+      service:
+        name: chronyd
+        state: started
+        enabled: yes

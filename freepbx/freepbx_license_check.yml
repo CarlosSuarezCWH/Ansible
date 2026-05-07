@@ -1,0 +1,13 @@
+---
+- name: Estado de licencias comerciales
+  hosts: all
+  tasks:
+    - name: Sysadmin info
+      command: fwconsole sysadmin info
+      register: sysadm
+      changed_when: false
+      ignore_errors: true
+
+    - name: Mostrar
+      debug:
+        var: sysadm.stdout_lines

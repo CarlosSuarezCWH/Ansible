@@ -1,0 +1,19 @@
+---
+- name: Listar puertos abiertos y servicios escuchando
+  hosts: all
+  tasks:
+    - name: Linux - Listar puertos
+      command: ss -tulnp
+      register: ports_linux
+      when: ansible_os_family != 'Windows'
+      changed_when: false
+
+    - name: Windows - Listar puertos
+      win_shell: Get-NetTCPConnection -State Listen | Select-Object LocalAddress, LocalPort, OwningProcess
+      register: ports_win
+      when: ansible_os_family == 'Windows'
+      changed_when: false
+
+    - name: Mostrar puertos
+      debug:
+        msg: "{{ ports_linux.stdout_lines | default(ports_win.stdout_lines) }}"

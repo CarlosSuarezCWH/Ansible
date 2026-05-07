@@ -1,0 +1,20 @@
+---
+- name: Estado de servicios cPanel
+  hosts: all
+  tasks:
+    - name: Check services
+      command: systemctl is-active {{ item }}
+      register: cpanel_services
+      loop:
+        - httpd
+        - named
+        - mysql
+        - exim
+        - pure-ftpd
+        - cpanel
+      ignore_errors: true
+      changed_when: false
+
+    - name: Report
+      debug:
+        msg: "{{ cpanel_services.results | map(attribute='stdout', default='failed') | list }}"

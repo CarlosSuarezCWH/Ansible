@@ -1,0 +1,13 @@
+---
+- name: Listar sitios WordPress, versión, plugins críticos
+  hosts: all
+  tasks:
+    - name: Listar sitios
+      command: wo site info --all
+      register: wo_sites
+      changed_when: false
+      ignore_errors: true
+
+    - name: Mostrar
+      debug:
+        var: wo_sites.stdout_lines

@@ -1,0 +1,7 @@
+---
+- name: Actualizar imágenes
+  hosts: all
+  tasks:
+    - name: Docker pull all (requiere bash script o iteracion)
+      shell: docker images | grep -v REPOSITORY | awk '{print $1":"$2}' | xargs -n1 docker pull
+      changed_when: true

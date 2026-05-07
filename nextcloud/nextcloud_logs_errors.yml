@@ -1,0 +1,13 @@
+---
+- name: Extraer errores recientes del log
+  hosts: all
+  tasks:
+    - name: Log errors
+      shell: tail -n 50 /var/www/nextcloud/data/nextcloud.log | grep Error || echo "No errors"
+      register: nc_err
+      changed_when: false
+      ignore_errors: true
+
+    - name: Mostrar
+      debug:
+        var: nc_err.stdout_lines

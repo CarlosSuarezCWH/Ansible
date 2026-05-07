@@ -1,0 +1,13 @@
+---
+- name: Usuarios, archivos, espacio consumido
+  hosts: all
+  tasks:
+    - name: Espacio en data
+      command: du -sh /var/www/nextcloud/data
+      register: nc_du
+      changed_when: false
+      ignore_errors: true
+
+    - name: Mostrar
+      debug:
+        var: nc_du.stdout

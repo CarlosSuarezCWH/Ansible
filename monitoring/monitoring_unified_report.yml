@@ -1,0 +1,7 @@
+---
+- name: Generar reporte consolidado (Mock)
+  hosts: localhost
+  tasks:
+    - name: Este playbook unifica otros usando roles o imports
+      debug:
+        msg: "Reporte unificado requiere ejecucion local y plantillas jinja. Archivo placeholder."

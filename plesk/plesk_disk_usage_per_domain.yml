@@ -1,0 +1,12 @@
+---
+- name: Reportar uso de disco por dominio
+  hosts: all
+  tasks:
+    - name: Obtener uso
+      command: plesk bin domain --info -all
+      register: plesk_domains
+      changed_when: false
+
+    - name: Mostrar info
+      debug:
+        var: plesk_domains.stdout_lines

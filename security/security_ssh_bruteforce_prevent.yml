@@ -1,0 +1,7 @@
+---
+- name: Rate-limiting + bans automáticos
+  hosts: all
+  tasks:
+    - name: UFW limit SSH
+      command: ufw limit ssh/tcp
+      ignore_errors: true
