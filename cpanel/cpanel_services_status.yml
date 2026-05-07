@@ -4,7 +4,7 @@
   tasks:
     - name: Check services
       shell: |
-        for svc in httpd named mysql exim pure-ftpd cpanel; do
+        for svc in httpd named mysql exim pure-ftpd proftpd cpanel; do
           status=$(systemctl is-active $svc 2>/dev/null || true)
           echo "- $svc: $status"
         done
