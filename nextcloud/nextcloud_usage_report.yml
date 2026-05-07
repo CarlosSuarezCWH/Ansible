@@ -1,6 +1,7 @@
 ---
 - name: Usuarios, archivos, espacio consumido
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Espacio en data
       command: du -sh /var/www/nextcloud/data

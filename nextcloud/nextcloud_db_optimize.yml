@@ -1,6 +1,7 @@
 ---
 - name: Optimizar tablas de la BD de Nextcloud
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: DB optimize
       command: sudo -u www-data php occ db:add-missing-indices

@@ -1,6 +1,7 @@
 ---
 - name: Actualizar GitLab a última versión
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Actualizar gitlab-ee
       apt:

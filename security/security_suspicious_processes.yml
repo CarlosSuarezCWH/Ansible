@@ -1,6 +1,7 @@
 ---
 - name: Buscar miners, backdoors, procesos ocultos
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Buscando procesos de alto CPU sin binario asociado
       shell: ps -eo pid,cmd,%cpu --sort=-%cpu | head -n 10

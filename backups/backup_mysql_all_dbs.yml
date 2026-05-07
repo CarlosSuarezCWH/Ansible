@@ -1,6 +1,7 @@
 ---
 - name: Respaldar todas las BD MySQL/MariaDB
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Dump all
       command: mysqldump --all-databases | gzip > /backup/mysql_all_$(date +%F).sql.gz

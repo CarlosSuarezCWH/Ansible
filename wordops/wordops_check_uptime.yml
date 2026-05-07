@@ -1,6 +1,7 @@
 ---
 - name: Verificar sitios caídos (HTTP 500, etc)
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Verificar nginx error logs
       shell: tail -n 100 /var/log/nginx/error.log | grep -E "500|502|503|504" || echo "No errors"

@@ -1,6 +1,7 @@
 ---
 - name: Reportar usuarios, proyectos, repos, storage
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Uso stats
       command: gitlab-rake gitlab:env:info

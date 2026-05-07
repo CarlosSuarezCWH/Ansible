@@ -1,6 +1,7 @@
 ---
 - name: Limpiar revisiones post duplicadas
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Limpiar
       command: wp post delete $(wp post list --post_type='revision' --format=ids --path={{ item }} --allow-root) --force --path={{ item }} --allow-root

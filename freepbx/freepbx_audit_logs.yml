@@ -1,6 +1,7 @@
 ---
 - name: Revisar logs recientes de seguridad
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Security log
       shell: tail -n 50 /var/log/asterisk/fail2ban || echo "No fail2ban log"

@@ -1,6 +1,7 @@
 ---
 - name: Rotar logs de GitLab
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Logrotate
       command: gitlab-ctl restart logrotate

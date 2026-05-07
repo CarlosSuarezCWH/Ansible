@@ -1,6 +1,7 @@
 ---
 - name: Sincronizar directorios clave a NAS/S3 remoto
   hosts: all
+  ignore_unreachable: yes
   vars:
     src_dir: "/var/www"
     dest_dir: "/backup/remote/"

@@ -1,6 +1,7 @@
 ---
 - name: Verificar bans por intentos de ataque
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: List bans
       command: fail2ban-client status asterisk

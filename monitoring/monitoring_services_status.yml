@@ -1,6 +1,7 @@
 ---
 - name: Estado de servicios críticos por servidor
   hosts: all
+  ignore_unreachable: yes
   vars:
     critical_services_linux: "sshd cron"
     critical_services_win: "Spooler"

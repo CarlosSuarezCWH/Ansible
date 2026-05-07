@@ -1,6 +1,7 @@
 ---
 - name: Limpiar cola de correos si excede X cantidad
   hosts: all
+  ignore_unreachable: yes
   vars:
     exim_queue_limit: 1000
   tasks:

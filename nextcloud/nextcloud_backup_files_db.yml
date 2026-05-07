@@ -1,6 +1,7 @@
 ---
 - name: Respaldar archivos data + BD
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Backup placeholder
       debug:

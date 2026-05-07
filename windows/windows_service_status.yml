@@ -1,6 +1,7 @@
 ---
 - name: Estado de servicios Windows
   hosts: all
+  ignore_unreachable: yes
   vars:
     win_services: 'Spooler, W32Time'
   tasks:

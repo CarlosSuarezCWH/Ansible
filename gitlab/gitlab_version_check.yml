@@ -1,6 +1,7 @@
 ---
 - name: Reportar versión actual y última estable
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Check gitlab info
       command: gitlab-rake gitlab:env:info

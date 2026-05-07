@@ -1,6 +1,7 @@
 ---
 - name: Reiniciar si actualizaciones lo requieren
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Reboot
       win_reboot:

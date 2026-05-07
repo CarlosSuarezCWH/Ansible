@@ -1,6 +1,7 @@
 ---
 - name: Revisar CPU, RAM, disco en Linux/Windows
   hosts: all
+  ignore_unreachable: yes
   gather_facts: yes
   tasks:
     - name: Linux - Obtener uso de CPU

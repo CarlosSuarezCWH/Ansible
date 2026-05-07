@@ -1,6 +1,7 @@
 ---
 - name: Listar dominios suspendidos
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Listar dominios
       shell: "plesk db 'SELECT name FROM domains WHERE status = 2;'"

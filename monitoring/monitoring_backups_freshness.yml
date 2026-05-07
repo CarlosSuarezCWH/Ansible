@@ -1,6 +1,7 @@
 ---
 - name: Verificar antigüedad del último backup
   hosts: all
+  ignore_unreachable: yes
   vars:
     backup_dir: "/var/backups"
   tasks:

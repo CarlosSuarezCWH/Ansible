@@ -1,6 +1,7 @@
 ---
 - name: Actualizar plugins de todos los sitios
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Actualizar plugins
       command: wp plugin update --all --path={{ item }} --allow-root

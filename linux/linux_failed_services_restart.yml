@@ -1,6 +1,7 @@
 ---
 - name: Detectar y reiniciar servicios caídos
   hosts: all
+  ignore_unreachable: yes
   become: true
   tasks:
     - name: Listar servicios fallidos

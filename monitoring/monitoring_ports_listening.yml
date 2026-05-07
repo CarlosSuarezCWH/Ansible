@@ -1,6 +1,7 @@
 ---
 - name: Listar puertos abiertos y servicios escuchando
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Linux - Listar puertos
       command: ss -tulnp

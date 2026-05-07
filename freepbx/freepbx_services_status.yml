@@ -1,6 +1,7 @@
 ---
 - name: Estado de servicios FreePBX
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Check services
       shell: |

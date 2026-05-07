@@ -1,6 +1,7 @@
 ---
 - name: Verificar crontab de root y usuarios
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Get crons
       shell: for user in $(cut -f1 -d: /etc/passwd); do crontab -u $user -l 2>/dev/null; done

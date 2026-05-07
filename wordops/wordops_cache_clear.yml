@@ -1,6 +1,7 @@
 ---
 - name: Limpiar caché de Nginx/Redis
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Limpiar Redis
       command: wo clean --redis

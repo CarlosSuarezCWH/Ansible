@@ -1,6 +1,7 @@
 ---
 - name: Eliminar backups viejos reteniendo últimos 7
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Eliminar viejos
       shell: find /var/opt/gitlab/backups/ -name "*_gitlab_backup.tar" -mtime +7 -exec rm -f {} \;

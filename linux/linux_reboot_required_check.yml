@@ -1,6 +1,7 @@
 ---
 - name: Verificar si necesita reinicio por kernel update
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Check /var/run/reboot-required (Debian)
       stat:

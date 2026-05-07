@@ -1,6 +1,7 @@
 ---
 - name: Ejecutar escaneo rápido
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Scan
       win_shell: Start-MpScan -ScanType QuickScan

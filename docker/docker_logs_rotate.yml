@@ -1,6 +1,7 @@
 ---
 - name: Limpiar logs de contenedores
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Config en daemon.json (placeholder)
       debug:

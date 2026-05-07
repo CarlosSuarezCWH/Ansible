@@ -1,6 +1,7 @@
 ---
 - name: Listar extensiones registradas
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Asterisk sip show peers
       command: asterisk -rx "pjsip show endpoints"

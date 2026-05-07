@@ -1,6 +1,7 @@
 ---
 - name: Estado y uptime
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Get docker ps
       command: docker ps -a --format "table {{'{{'}} .Names {{'}}'}}	{{'{{'}} .Status {{'}}'}}"

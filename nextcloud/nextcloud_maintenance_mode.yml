@@ -1,6 +1,7 @@
 ---
 - name: Activar/desactivar modo mantenimiento
   hosts: all
+  ignore_unreachable: yes
   vars:
     maintenance_state: "on" # on o off
   tasks:

@@ -1,6 +1,7 @@
 ---
 - name: Medir latencia y pérdida de paquetes
   hosts: all
+  ignore_unreachable: yes
   vars:
     ping_target: "8.8.8.8"
     ping_count: 5

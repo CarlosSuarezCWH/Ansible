@@ -1,6 +1,7 @@
 ---
 - name: Extraer errores recientes del log
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Log errors
       shell: tail -n 50 /var/www/nextcloud/data/nextcloud.log | grep Error || echo "No errors"

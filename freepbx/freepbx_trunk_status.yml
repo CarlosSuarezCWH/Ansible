@@ -1,6 +1,7 @@
 ---
 - name: Verificar estado de troncales SIP/IAX
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Registrations
       command: asterisk -rx "pjsip show registrations"

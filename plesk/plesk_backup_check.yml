@@ -1,6 +1,7 @@
 ---
 - name: Verificar backups y espacio usado
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Listar backups
       command: plesk sbin pmm-ras --get-dump-list

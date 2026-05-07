@@ -1,6 +1,7 @@
 ---
 - name: Respaldar todas las BD MongoDB
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Dump all
       command: mongodump --out /backup/mongo_$(date +%F)

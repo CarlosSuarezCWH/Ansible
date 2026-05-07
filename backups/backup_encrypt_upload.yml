@@ -1,6 +1,7 @@
 ---
 - name: Encriptar backup y subir a cloud
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: GPG encrypt (placeholder)
       command: echo "gpg -c --passphrase {{ '{{ pass }}' }} file.tar.gz"

@@ -1,6 +1,7 @@
 ---
 - name: Generar reporte consolidado (Mock)
   hosts: localhost
+  ignore_unreachable: yes
   tasks:
     - name: Este playbook unifica otros usando roles o imports
       debug:

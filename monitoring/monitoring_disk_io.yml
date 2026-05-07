@@ -1,6 +1,7 @@
 ---
 - name: Revisar I/O de discos (iostat)
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Linux - Asegurar sysstat instalado
       package:

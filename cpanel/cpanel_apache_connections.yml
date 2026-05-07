@@ -1,6 +1,7 @@
 ---
 - name: Monitorear conexiones activas en Apache
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Contar conexiones HTTP
       shell: netstat -an | grep :80 | wc -l

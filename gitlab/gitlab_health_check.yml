@@ -1,6 +1,7 @@
 ---
 - name: Revisar estado de componentes internos
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Healthcheck
       command: gitlab-rake gitlab:check SANITIZE=true

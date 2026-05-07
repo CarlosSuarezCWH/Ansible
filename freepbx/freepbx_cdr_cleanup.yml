@@ -1,6 +1,7 @@
 ---
 - name: Limpiar registros de llamadas (CDR) viejos
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Cleanup script
       debug:

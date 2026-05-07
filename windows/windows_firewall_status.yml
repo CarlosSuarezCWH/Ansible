@@ -1,6 +1,7 @@
 ---
 - name: Verificar reglas y estado del firewall
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Get firewall profile
       win_shell: Get-NetFirewallProfile | Select-Object Name, Enabled

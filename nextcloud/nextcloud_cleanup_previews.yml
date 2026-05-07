@@ -1,6 +1,7 @@
 ---
 - name: Limpiar caché de previews viejos
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Preview generator command placeholder
       debug:

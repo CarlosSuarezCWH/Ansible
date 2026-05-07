@@ -1,6 +1,7 @@
 ---
 - name: Sincronizar hora con servidores NTP
   hosts: all
+  ignore_unreachable: yes
   become: true
   tasks:
     - name: Instalar chrony

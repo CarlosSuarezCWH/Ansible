@@ -1,6 +1,7 @@
 ---
 - name: Identificar procesos que más consumen recursos
   hosts: all
+  ignore_unreachable: yes
   gather_facts: yes
   tasks:
     - name: Linux - Procesos top por CPU y RAM

@@ -1,6 +1,7 @@
 ---
 - name: Instalar actualizaciones de seguridad
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Install updates
       win_updates:

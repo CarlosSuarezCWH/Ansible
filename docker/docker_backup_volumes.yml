@@ -1,6 +1,7 @@
 ---
 - name: Respaldar volúmenes persistentes
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: List vols
       command: docker volume ls -q

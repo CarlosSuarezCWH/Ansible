@@ -1,6 +1,7 @@
 ---
 - name: Listar versiones PHP instaladas y la default
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Listar PHP
       command: /usr/local/cpanel/bin/rebuild_phpconf --current

@@ -1,6 +1,7 @@
 ---
 - name: Verificar estado de licencia cPanel
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Verificar licencia
       command: /usr/local/cpanel/cpkeyclt

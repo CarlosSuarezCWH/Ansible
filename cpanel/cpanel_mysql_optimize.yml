@@ -1,6 +1,7 @@
 ---
 - name: Optimizar tablas MySQL automáticamente
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Optimizar bases de datos mysqlcheck
       command: mysqlcheck -o --all-databases

@@ -1,6 +1,7 @@
 ---
 - name: Listar handlers PHP configurados
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: PHP handlers
       command: plesk bin php_handler --list

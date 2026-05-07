@@ -1,6 +1,7 @@
 ---
 - name: Actualizar núcleos de WordPress (core)
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Actualizar core
       command: wp core update --path={{ item }} --allow-root

@@ -1,6 +1,7 @@
 ---
 - name: Limpiar archivos temporales
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Cleanmgr
       win_shell: Start-Process -Wait -FilePath "$env:windir\System32\cleanmgr.exe" -ArgumentList "/sagerun:1"

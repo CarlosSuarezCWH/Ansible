@@ -1,6 +1,7 @@
 ---
 - name: Actualizar Plesk y extensiones
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Actualizar plesk
       command: plesk installer update --all-components

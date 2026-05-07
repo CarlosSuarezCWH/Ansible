@@ -1,6 +1,7 @@
 ---
 - name: Recargar configuración sin caída del servicio
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Reload
       command: asterisk -rx "core reload"

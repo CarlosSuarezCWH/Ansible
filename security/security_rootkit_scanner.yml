@@ -1,6 +1,7 @@
 ---
 - name: Ejecutar rkhunter/chkrootkit en Linux
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Rkhunter check
       command: rkhunter --check --sk

@@ -1,6 +1,7 @@
 ---
 - name: Listar reglas de firewall de Plesk
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Firewall list
       command: /usr/local/psa/bin/modules/firewall/settings -l

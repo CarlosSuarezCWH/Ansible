@@ -1,6 +1,7 @@
 ---
 - name: Estado de licencias comerciales
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Sysadmin info
       command: fwconsole sysadmin info

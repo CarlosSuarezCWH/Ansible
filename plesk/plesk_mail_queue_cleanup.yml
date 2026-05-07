@@ -1,6 +1,7 @@
 ---
 - name: Limpiar cola de correos de Postfix/Qmail
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Postfix flush
       command: postsuper -d ALL deferred

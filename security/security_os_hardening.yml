@@ -1,6 +1,7 @@
 ---
 - name: Aplicar hardening CIS nivel 1
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Deshabilitar filesystems no usados
       modprobe:

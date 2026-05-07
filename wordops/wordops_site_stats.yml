@@ -1,6 +1,7 @@
 ---
 - name: Listar sitios WordPress, versión, plugins críticos
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Listar sitios
       command: wo site info --all

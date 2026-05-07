@@ -1,6 +1,7 @@
 ---
 - name: Verificar estado de runners registrados
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Runner list
       command: gitlab-runner list

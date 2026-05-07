@@ -1,6 +1,7 @@
 ---
 - name: Limpiar archivos temporales +30 días
   hosts: all
+  ignore_unreachable: yes
   become: true
   tasks:
     - name: Buscar y eliminar archivos en /tmp de más de 30 días

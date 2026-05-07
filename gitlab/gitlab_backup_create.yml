@@ -1,6 +1,7 @@
 ---
 - name: Ejecutar backup oficial de GitLab
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Crear Backup
       command: gitlab-backup create

@@ -1,6 +1,7 @@
 ---
 - name: Listar puertos abiertos y justificar uso
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Nmap
       command: ss -tulpn

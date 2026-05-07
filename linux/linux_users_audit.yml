@@ -1,6 +1,7 @@
 ---
 - name: Listar usuarios, últimos logins, sudoers
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Listar usuarios
       command: cat /etc/passwd

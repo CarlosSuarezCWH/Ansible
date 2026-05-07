@@ -1,6 +1,7 @@
 ---
 - name: Verificar backups existentes y su tamaño
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Verificar dir de backups
       command: ls -lh /backup/cpbackup/daily/

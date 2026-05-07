@@ -1,6 +1,7 @@
 ---
 - name: Configurar SSH seguro
   hosts: all
+  ignore_unreachable: yes
   become: true
   tasks:
     - name: Deshabilitar Root Login

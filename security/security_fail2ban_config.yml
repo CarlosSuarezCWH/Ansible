@@ -1,6 +1,7 @@
 ---
 - name: Configurar bans para SSH, Apache, Exim, etc
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Ensure fail2ban is running
       service:

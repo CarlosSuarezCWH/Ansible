@@ -1,6 +1,7 @@
 ---
 - name: Actualizar cPanel y/o componentes
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Ejecutar upcp
       command: /scripts/upcp

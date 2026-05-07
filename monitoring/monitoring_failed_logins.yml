@@ -1,6 +1,7 @@
 ---
 - name: Reportar intentos de login fallidos
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Linux - Failed logins en auth.log o secure
       shell: grep "Failed password" /var/log/auth.log || grep "Failed password" /var/log/secure || echo "No failed logins found"

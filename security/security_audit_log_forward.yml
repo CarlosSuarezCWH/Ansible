@@ -1,6 +1,7 @@
 ---
 - name: Enviar logs a SIEM central
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Rsyslog fwd config (placeholder)
       lineinfile:

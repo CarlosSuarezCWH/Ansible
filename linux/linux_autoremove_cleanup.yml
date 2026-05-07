@@ -1,6 +1,7 @@
 ---
 - name: Limpiar paquetes huérfanos y caché
   hosts: all
+  ignore_unreachable: yes
   become: true
   tasks:
     - name: Debian/Ubuntu - Autoremove & autoclean

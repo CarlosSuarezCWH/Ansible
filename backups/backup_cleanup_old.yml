@@ -1,6 +1,7 @@
 ---
 - name: Eliminar backups con retención
   hosts: all
+  ignore_unreachable: yes
   vars:
     backup_dir: "/backup"
     retention_days: 30

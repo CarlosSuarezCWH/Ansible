@@ -1,6 +1,7 @@
 ---
 - name: Extraer errores críticos de Event Viewer
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Get events
       win_shell: Get-EventLog -LogName System -EntryType Error -Newest 10 | Select-Object TimeGenerated, Source, Message

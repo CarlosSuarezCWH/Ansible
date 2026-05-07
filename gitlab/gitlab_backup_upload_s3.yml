@@ -1,6 +1,7 @@
 ---
 - name: Subir backup a S3 u otro storage remoto
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Subida asume configuracion rclone o s3cmd (placeholder)
       debug:

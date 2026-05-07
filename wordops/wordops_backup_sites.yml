@@ -1,6 +1,7 @@
 ---
 - name: Generar backup de archivos + BD
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Backup
       command: wo site backup --all

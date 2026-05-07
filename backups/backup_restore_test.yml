@@ -1,6 +1,7 @@
 ---
 - name: Simular restauración para verificar integridad
   hosts: localhost
+  ignore_unreachable: yes
   tasks:
     - name: Test
       debug:

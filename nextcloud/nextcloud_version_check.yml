@@ -1,6 +1,7 @@
 ---
 - name: Comparar versión actual vs upstream
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Version info
       command: sudo -u www-data php occ status

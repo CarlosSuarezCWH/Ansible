@@ -1,6 +1,7 @@
 ---
 - name: Verificar/Configurar cron para tareas internas
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Set cron job for nextcloud
       cron:

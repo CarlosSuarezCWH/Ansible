@@ -1,6 +1,7 @@
 ---
 - name: Reportar uso de disco por cuenta de usuario
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Listar cuotas de cPanel
       command: /usr/local/cpanel/scripts/repquota

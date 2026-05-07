@@ -1,6 +1,7 @@
 ---
 - name: Generar backup de configuración
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Run backup
       command: fwconsole backup --run

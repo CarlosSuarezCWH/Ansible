@@ -1,6 +1,7 @@
 ---
 - name: Verificar fechas de expiración de certificados SSL
   hosts: all
+  ignore_unreachable: yes
   vars:
     ssl_domain: "localhost"
     ssl_port: 443

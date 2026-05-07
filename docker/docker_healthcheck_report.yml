@@ -1,6 +1,7 @@
 ---
 - name: Verificar healthcheck de cada contenedor
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Healthcheck status
       command: docker ps --format "{{'{{'}}.Names{{'}}'}}: {{'{{'}}.Status{{'}}'}}" | grep health

@@ -1,6 +1,7 @@
 ---
 - name: Optimizar bases de datos WordPress
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Optimizar DBs
       command: wp db optimize --path={{ item }} --allow-root

@@ -1,6 +1,7 @@
 ---
 - name: Actualizar módulos del sistema
   hosts: all
+  ignore_unreachable: yes
   tasks:
     - name: Update all modules
       command: fwconsole ma upgradeall

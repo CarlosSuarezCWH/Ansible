@@ -1,6 +1,7 @@
 ---
 - name: Liberar espacio eliminando logs, cores, basura
   hosts: all
+  ignore_unreachable: yes
   become: true
   tasks:
     - name: Eliminar archivos core
