@@ -2,17 +2,20 @@
 - name: Estado de servicios Windows
   hosts: all
   vars:
-    win_services: ['Spooler', 'W32Time']
+    win_services: 'Spooler, W32Time'
   tasks:
     - name: Get service status
-      win_service:
-        name: "{{ item }}"
-      register: win_srv
-      loop: "{{ win_services }}"
+      win_shell: |
+        $services = "{{ win_services }}" -split ','
+        foreach ($svc in $services) {
+            $svc = $svc.Trim()
+            $status = (Get-Service -Name $svc -ErrorAction SilentlyContinue).Status
+            if (-not $status) { $status = 'NotFound' }
+            Write-Output "- $svc: $status"
+        }
+      register: services_status
+      changed_when: false
 
     - name: Report
       debug:
-        msg: |
-          {% for r in win_srv.results %}
-          - {{ r.item }}: {{ r.state | default('failed') }}
-          {% endfor %}
+        msg: "{{ services_status.stdout }}"

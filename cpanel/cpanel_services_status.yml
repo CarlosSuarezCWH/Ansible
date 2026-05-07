@@ -3,21 +3,13 @@
   hosts: all
   tasks:
     - name: Check services
-      command: systemctl is-active {{ item }}
-      register: cpanel_services
-      loop:
-        - httpd
-        - named
-        - mysql
-        - exim
-        - pure-ftpd
-        - cpanel
-      failed_when: false
+      shell: |
+        for svc in httpd named mysql exim pure-ftpd cpanel; do
+          echo "- $svc: $(systemctl is-active $svc 2>/dev/null || echo 'inactive/failed')"
+        done
+      register: services_status
       changed_when: false
 
     - name: Report
       debug:
-        msg: |
-          {% for r in cpanel_services.results %}
-          - {{ r.item }}: {{ r.stdout | default('failed') }}
-          {% endfor %}
+        msg: "{{ services_status.stdout }}"

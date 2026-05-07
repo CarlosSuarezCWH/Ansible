@@ -3,21 +3,13 @@
   hosts: all
   tasks:
     - name: Check services
-      command: systemctl is-active {{ item }}
-      register: plesk_services
-      loop:
-        - psa
-        - sw-cp-server
-        - mariadb
-        - postfix
-        - dovecot
-        - named
-      failed_when: false
+      shell: |
+        for svc in psa sw-cp-server mariadb postfix dovecot named; do
+          echo "- $svc: $(systemctl is-active $svc 2>/dev/null || echo 'inactive/failed')"
+        done
+      register: services_status
       changed_when: false
 
     - name: Report
       debug:
-        msg: |
-          {% for r in plesk_services.results %}
-          - {{ r.item }}: {{ r.stdout | default('failed') }}
-          {% endfor %}
+        msg: "{{ services_status.stdout }}"

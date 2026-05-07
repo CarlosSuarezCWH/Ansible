@@ -3,19 +3,13 @@
   hosts: all
   tasks:
     - name: Check services
-      command: systemctl is-active {{ item }}
-      register: nc_services
-      loop:
-        - apache2
-        - php8.1-fpm
-        - mysql
-        - redis-server
-      failed_when: false
+      shell: |
+        for svc in apache2 php8.1-fpm mysql redis-server; do
+          echo "- $svc: $(systemctl is-active $svc 2>/dev/null || echo 'inactive/failed')"
+        done
+      register: services_status
       changed_when: false
 
     - name: Report
       debug:
-        msg: |
-          {% for r in nc_services.results %}
-          - {{ r.item }}: {{ r.stdout | default('failed') }}
-          {% endfor %}
+        msg: "{{ services_status.stdout }}"
