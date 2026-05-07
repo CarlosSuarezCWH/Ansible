@@ -12,9 +12,12 @@
         - postfix
         - dovecot
         - named
-      ignore_errors: true
+      failed_when: false
       changed_when: false
 
     - name: Report
       debug:
-        msg: "{{ plesk_services.results | map(attribute='stdout', default='failed') | list }}"
+        msg: |
+          {% for r in plesk_services.results %}
+          - {{ r.item }}: {{ r.stdout | default('failed') }}
+          {% endfor %}

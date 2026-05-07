@@ -12,4 +12,7 @@
 
     - name: Report
       debug:
-        msg: "{{ win_srv.results | map(attribute='state', default='failed') | list }}"
+        msg: |
+          {% for r in win_srv.results %}
+          - {{ r.item }}: {{ r.state | default('failed') }}
+          {% endfor %}

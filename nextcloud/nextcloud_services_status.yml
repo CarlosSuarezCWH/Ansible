@@ -10,9 +10,12 @@
         - php8.1-fpm
         - mysql
         - redis-server
-      ignore_errors: true
+      failed_when: false
       changed_when: false
 
     - name: Report
       debug:
-        msg: "{{ nc_services.results | map(attribute='stdout', default='failed') | list }}"
+        msg: |
+          {% for r in nc_services.results %}
+          - {{ r.item }}: {{ r.stdout | default('failed') }}
+          {% endfor %}

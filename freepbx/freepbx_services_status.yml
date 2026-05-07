@@ -9,9 +9,12 @@
         - asterisk
         - httpd
         - mariadb
-      ignore_errors: true
+      failed_when: false
       changed_when: false
 
     - name: Report
       debug:
-        msg: "{{ fbx_services.results | map(attribute='stdout', default='failed') | list }}"
+        msg: |
+          {% for r in fbx_services.results %}
+          - {{ r.item }}: {{ r.stdout | default('failed') }}
+          {% endfor %}

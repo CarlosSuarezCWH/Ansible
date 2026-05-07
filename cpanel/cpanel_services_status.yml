@@ -12,9 +12,12 @@
         - exim
         - pure-ftpd
         - cpanel
-      ignore_errors: true
+      failed_when: false
       changed_when: false
 
     - name: Report
       debug:
-        msg: "{{ cpanel_services.results | map(attribute='stdout', default='failed') | list }}"
+        msg: |
+          {% for r in cpanel_services.results %}
+          - {{ r.item }}: {{ r.stdout | default('failed') }}
+          {% endfor %}

@@ -9,4 +9,4 @@
 
     - name: Report
       debug:
-        var: gitlab_status.stdout_lines
+        msg: "{{ gitlab_status.stdout }}"

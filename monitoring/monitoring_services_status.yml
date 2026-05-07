@@ -11,7 +11,7 @@
       loop: "{{ critical_services_linux }}"
       when: ansible_os_family != 'Windows'
       changed_when: false
-      ignore_errors: true
+      failed_when: false
 
     - name: Windows - Check services
       win_service:
@@ -19,7 +19,7 @@
       register: srv_win
       loop: "{{ critical_services_win }}"
       when: ansible_os_family == 'Windows'
-      ignore_errors: true
+      failed_when: false
 
     - name: Mostrar estado
       debug:
